@@ -14,6 +14,8 @@ Retrofit+jiechao视频框架+RecyclerView+Glide
   > *  implementation 'jp.wasabeef:glide-transformations:2.0.1'
 ### 图三用的节操(jiecao视频加载框架)，图四就是Retrofit的简单用法加上配合接口做的一个简单的翻译Demo，如果想要封装Retrofit可参考图片加载+共享的那个项目
     > * implementation 'fm.jiecao:jiecaovideoplayer:5.5'
+### 总结
+    > * 很多新奇好玩的东西请关注我的博客:https://tony-greel.github.io/
 
 ![image](https://github.com/tony-greel/MaterialDesignDemo/blob/master/RetrofitDemo/src/main/res/mipmap-xxxhdpi/84004645-DFBB-48E2-9474-D71FE482F7EC.png)
 ![image](https://github.com/tony-greel/MaterialDesignDemo/blob/master/RetrofitDemo/src/main/res/mipmap-xxxhdpi/1F7229BD-01C0-42F0-8DE1-D1972159C854.png)
