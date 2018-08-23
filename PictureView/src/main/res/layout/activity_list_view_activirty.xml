@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".video.ListViewActivirty"
+    android:orientation="vertical">
+
+    <Button
+        android:textAllCaps="false"
+        android:id="@+id/normal_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="8dp"
+        android:text="普通ListView中播放视频"/>
+
+    <Button
+        android:textAllCaps="false"
+        android:id="@+id/viewpager_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="8dp"
+        android:text="ViewPager中的ListView中播放视频"/>
+
+    <Button
+        android:textAllCaps="false"
+        android:id="@+id/multi_holder_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="8dp"
+        android:text="分类型的ListView中播放视频"/>
+
+    <Button
+        android:textAllCaps="false"
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="8dp"
+        android:text="recyclerView中播放视频"/>
+
+
+
+</LinearLayout>
