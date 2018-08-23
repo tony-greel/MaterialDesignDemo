@@ -17,7 +17,7 @@ public class InfoDatabaseHelper extends SQLiteOpenHelper {
 	
 	private static final String DB_CREATE_CONTACTS="create table if not exists "
 			            + HistoricalData.PERSON_INFO_TABLE+"("+"_id INTEGER primary key autoincrement,"
-						+ HistoricalData.CONTENT+" TEXT,"
+						+ HistoricalData.CONTENT+" TEXT UNIQUE,"
 						+ HistoricalData.RESULT+" TEXT ,"
 						+ HistoricalData.DATE+" TEXT )";
 	
