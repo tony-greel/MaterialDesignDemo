@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">AnimationSpecial</string>
+    <string name="title_activity_main2">Main2Activity</string>
+
+    <string name="share_element_imageview">share element imageview</string>
+    <string name="share_element_header">share element header</string>
+    <string name="share_element_tv_info">share element tv info</string>
+
+    <string name="text_no_love">无人与我立黄昏，无人问我粥可温。\n无人告我夜已深，无人与我把酒分。\n--------------\n黄昏将近粥可温，你我畅饮把酒分。\n家常琐事都可聊，不知不觉夜已深。</string>
+
+</resources>

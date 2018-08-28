@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <Button
+        android:id="@+id/but_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="测试：普通观察者模式的创建"
+        android:layout_gravity="center_horizontal"/>
+
+    <Button
+        android:id="@+id/but_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="测试：链式调用来创建观察者"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="60dp"/>
+
+    <Button
+        android:id="@+id/but_3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="测试：快速创建被观察者，数组形式"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="120dp"/>
+
+    <Button
+        android:id="@+id/but_4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="测试：快速创建被观察者，集合形式"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="180dp"/>
+
+    <Button
+        android:id="@+id/but_5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="测试：延时创建被观察者"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="240dp"/>
+</FrameLayout>

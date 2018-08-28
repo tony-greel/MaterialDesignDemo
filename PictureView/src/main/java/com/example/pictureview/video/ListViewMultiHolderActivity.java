@@ -22,7 +22,6 @@ public class ListViewMultiHolderActivity extends Activity {
         setContentView(R.layout.activity_list_view_multi_holder);
         initView();
         assignment();
-        monitorInitialization();
     }
 
     private void initView() {
@@ -32,9 +31,6 @@ public class ListViewMultiHolderActivity extends Activity {
     private void assignment() {
         mAdapter = new VideoListAdapter(this);
         list_view_tow.setAdapter(mAdapter);
-    }
-
-    private void monitorInitialization() {
     }
 
     @Override

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <HorizontalScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:divider="@drawable/divider_linearlayout"
+            android:orientation="horizontal"
+            android:paddingBottom="15dp"
+            android:id="@+id/viewgroup_transition"
+            android:paddingTop="15dp"
+            android:showDividers="middle|beginning|end">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_bg_item_linearlayout"
+                android:text="进场动画一"
+                android:textColor="?attr/colorPrimaryDark"
+                android:layout_marginBottom="20dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_bg_item_linearlayout"
+                android:text="进场动画二"
+                android:textColor="?attr/colorPrimaryDark"
+                android:layout_marginBottom="20dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_bg_item_linearlayout"
+                android:text="进场动画三"
+                android:textColor="?attr/colorPrimaryDark"
+                android:layout_marginBottom="20dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_bg_item_linearlayout"
+                android:text="进场动画四"
+                android:textColor="?attr/colorPrimaryDark"
+                android:layout_marginBottom="20dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_bg_item_linearlayout"
+                android:text="退出动画一"
+                android:textColor="?attr/colorPrimaryDark"
+                android:layout_marginBottom="20dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_bg_item_linearlayout"
+                android:text="退出动画二"
+                android:textColor="?attr/colorPrimaryDark"
+                android:layout_marginBottom="20dp"/>
+        </LinearLayout>
+    </HorizontalScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginTop="60dp">
+
+        <View
+            android:layout_width="match_parent"
+            android:background="?attr/colorPrimaryDark"
+            android:layout_height="1px"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_share_elements"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+</FrameLayout>
