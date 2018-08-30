@@ -1,9 +1,11 @@
-package com.example.rxjavadeno;
+package com.example.rxjavadeno.activity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+
+import com.example.rxjavadeno.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -70,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
                 delayedCreationOfObservers();
             }
         });
+
     }
 
 

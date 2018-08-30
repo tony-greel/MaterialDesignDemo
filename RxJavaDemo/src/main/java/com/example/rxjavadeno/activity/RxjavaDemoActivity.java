@@ -5,16 +5,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.example.rxjavadeno.Interface.GetRequest_Interface;
 import com.example.rxjavadeno.R;
-import com.example.rxjavadeno.model.Translation;
-import com.example.rxjavadeno.model.Translation_2;
+import com.example.rxjavadeno.bean.Translation;
+import com.example.rxjavadeno.bean.Translation_2;
 
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.ObservableSource;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -38,12 +39,52 @@ public class RxjavaDemoActivity extends AppCompatActivity implements View.OnClic
     private Observable<Translation> observable1;
     private Observable<Translation_2> observable2;
 
+    private Observable<Integer> observable;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rxjava);
         initView();
         monitorInitView();
+        updateUi();
+    }
+
+    private void updateUi() {
+        // 创建被观察者
+        observable.create(new ObservableOnSubscribe<Integer>() {
+            @Override
+            public void subscribe(ObservableEmitter<Integer> emitter) throws Exception {
+                Log.d(TAG, "Observable thread is : " + Thread.currentThread().getName());
+                Log.d(TAG, "emit 1");
+                emitter.onNext(1);
+                emitter.onNext(2);
+                emitter.onNext(3);
+            }
+        }).map(new Function<Integer, String>() { // 中间类型转换
+            @Override
+            public String apply(Integer integer) throws Exception {
+                return "接受结果" + integer;
+            }
+        }).subscribe(new Consumer<String>() {
+            @Override
+            public void accept(String s) throws Exception {
+                Log.d(TAG, s);
+            }
+        });
+        // 创建观察者
+        Consumer <Integer> consumer = new Consumer<Integer>() {
+            @Override
+            public void accept(Integer integer) throws Exception {
+                Log.d(TAG, "Observer thread is :" + Thread.currentThread().getName());
+                Log.d(TAG, "onNext: " + integer);
+            }
+        };
+        // 订阅 (通过订阅关联,被观察者与观察者)
+//        observable.subscribe(consumer);
+        observable.subscribeOn(Schedulers.newThread()) // 指定被观察者在newThread线程中
+                .observeOn(AndroidSchedulers.mainThread()) // 指定观察者在main线程中
+                .subscribe(consumer);
     }
 
     private void initView() {

@@ -1,4 +1,4 @@
-package com.example.rxjavadeno.model;
+package com.example.rxjavadeno.bean;
 
 import android.util.Log;
 

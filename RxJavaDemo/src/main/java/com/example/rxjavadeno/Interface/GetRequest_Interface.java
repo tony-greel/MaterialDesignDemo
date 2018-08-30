@@ -1,7 +1,7 @@
 package com.example.rxjavadeno.Interface;
 
-import com.example.rxjavadeno.model.Translation;
-import com.example.rxjavadeno.model.Translation_2;
+import com.example.rxjavadeno.bean.Translation;
+import com.example.rxjavadeno.bean.Translation_2;
 
 import io.reactivex.Observable;
 import retrofit2.http.GET;

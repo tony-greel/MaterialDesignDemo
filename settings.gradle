@@ -1,1 +1,1 @@
-include ':app', ':PictureView', ':RetrofitDemo', ':AnimationSpecial', ':RxJavaDeno'
+include ':app', ':PictureView', ':RetrofitDemo', ':AnimationSpecial', ':RxJavaDemo'

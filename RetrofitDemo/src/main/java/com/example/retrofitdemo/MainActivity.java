@@ -24,6 +24,8 @@ import com.example.retrofitdemo.database.InfoDatabaseHelper;
 import com.example.retrofitdemo.interfacei.Gte_NetworkRequest;
 import com.example.retrofitdemo.interfacei.Post_NetworkRequest;
 
+import java.io.IOException;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -114,9 +116,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Gte_NetworkRequest request = retrofit.create(Gte_NetworkRequest.class);
 
         // 对发送请求进行封装
-        Call<Translation> call = request.getCall();
+        final Call<Translation> call = request.getCall();
 
-        // 发送网络请求
+        // 发送网络请求 (同步调取)
         call.enqueue(new Callback<Translation>() {
             @Override
             public void onResponse(Call<Translation> call, Response<Translation> response) {

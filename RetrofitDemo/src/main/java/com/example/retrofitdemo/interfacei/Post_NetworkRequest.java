@@ -14,4 +14,13 @@ public interface Post_NetworkRequest {
     //采用@Post表示Post方法进行请求（传入部分url地址）
     // 采用@FormUrlEncoded注解的原因:API规定采用请求格式x-www-form-urlencoded,即表单形式
     // 需要配合@Field 向服务器提交需要的字段
+
+    @POST("login") // 登录
+    Call<User> login(@Field("ac") String ac , @Field("type") String type, @Field("pwd") String pwd);
+
+    @POST("reg") // 注册
+    Call<User> reg(@Field("name") String name , @Field("pwd") String pwd , @Field("email") String email , @Field("verCode") String verCode);
+
+    @POST("sendCode") // 邮箱注册
+    Call<User> sendCode(@Field("email") String email );
 }
