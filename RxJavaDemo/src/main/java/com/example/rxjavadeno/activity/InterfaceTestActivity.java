@@ -1,7 +1,7 @@
 package com.example.rxjavadeno.activity;
 
+import android.content.Context;
 import android.os.Bundle;
-import android.os.UserHandle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -10,22 +10,23 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.example.rxjavadeno.BaseActivity;
 import com.example.rxjavadeno.Interface.PostRequest;
 import com.example.rxjavadeno.R;
 import com.example.rxjavadeno.bean.UserLog;
 import com.example.rxjavadeno.bean.UserRegister;
 import com.example.rxjavadeno.model.UserHelper;
-import com.example.rxjavadeno.util.RetrofitProvider;
+import com.example.rxjavadeno.util.NetworkRequest;
 
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import io.reactivex.Observer;
+import io.reactivex.ObservableSource;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
+import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 
 
@@ -99,12 +100,59 @@ public class InterfaceTestActivity extends AppCompatActivity implements View.OnC
                 break;
             case R.id.but_reg:
                 initData();
-                userHandle.register(this,name,pwd,email,verCode);
+                userHandle.nestedRequest(this,name,pwd,email,verCode);
                 break;
             case R.id.but_verification:
                 initData();
                 userHandle.verification(this,e);
                 break;
         }
+    }
+
+    private void nestedRequest(final Context context){
+
+        name = etId.getText().toString();
+        pwd = etPassword.getText().toString();
+        email = etEmail.getText().toString();
+        verCode = etVerCode.getText().toString();
+
+        final PostRequest postRequest = NetworkRequest.create().create(PostRequest.class);
+        postRequest.reg(name,pwd,email,verCode)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnNext(new Consumer<UserRegister>() {
+                    @Override
+                    public void accept(UserRegister registerResponse) throws Exception {
+                        Log.d("nestedRequest",registerResponse.getMsg().toString());
+                    }
+                })
+                .observeOn(Schedulers.io())
+                .flatMap(new Function<UserRegister, ObservableSource<UserLog>>() {
+                    @Override
+                    public ObservableSource<UserLog> apply(UserRegister userRegister) throws Exception {
+                        return postRequest.login(email,"1",pwd);
+                    }
+                })
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<UserLog>() {
+                    @Override
+                    public void accept(UserLog userLog) throws Exception {
+                        BaseActivity.showToast(context, "成功");
+                        Log.d("userLog", String.valueOf(userLog.getCode()));
+                        String code = String.valueOf(userLog.getCode());
+                        if (code.equals("-1")){
+                            BaseActivity.showToast(context,"密码或账号错误");
+                        }else {
+                            BaseActivity.showToast(context,"登录成功！");
+                            String tv = userLog.getDatas().getEmail();
+                            Log.d("userLog" , tv);
+                        }
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        BaseActivity.showToast(context,"失败");
+                    }
+                });
     }
 }

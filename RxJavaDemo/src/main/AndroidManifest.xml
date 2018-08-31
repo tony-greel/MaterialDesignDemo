@@ -22,7 +22,7 @@
 
         <activity android:name=".activity.MainActivity"/>
         <activity android:name=".activity.RxjavaDemoActivity"/>
-
+        <activity android:name=".BaseActivity"/>
     </application>
 
 </manifest>

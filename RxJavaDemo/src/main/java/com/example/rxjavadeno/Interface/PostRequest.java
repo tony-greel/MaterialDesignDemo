@@ -6,13 +6,15 @@ import com.example.rxjavadeno.bean.UserRegister;
 import com.example.rxjavadeno.bean.UserSendCode;
 
 import io.reactivex.Observable;
+import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
 
 public interface PostRequest {
 
-    String Login = "http://wenhaha.tunnel.echomod.cn/";
+    String Login = "http://172.20.10.6:8080/";
 
     @FormUrlEncoded
     @POST("user/login") // 登录
@@ -25,4 +27,5 @@ public interface PostRequest {
     @FormUrlEncoded
     @POST("user/sendCode") // 邮箱验证
     Observable<UserSendCode> sendCode (@Field("email") String email );
+
 }

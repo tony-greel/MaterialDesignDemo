@@ -25,5 +25,12 @@
         android:text="嵌套请求网络"
         android:layout_gravity="center_horizontal"/>
 
+    <TextView
+        android:id="@+id/tv_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="获取缓存数据"/>
+
 
 </FrameLayout>

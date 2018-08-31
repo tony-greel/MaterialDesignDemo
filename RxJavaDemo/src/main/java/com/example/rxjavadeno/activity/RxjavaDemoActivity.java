@@ -1,15 +1,19 @@
 package com.example.rxjavadeno.activity;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
+import com.example.rxjavadeno.BaseActivity;
 import com.example.rxjavadeno.Interface.GetRequest_Interface;
 import com.example.rxjavadeno.R;
 import com.example.rxjavadeno.bean.Translation;
 import com.example.rxjavadeno.bean.Translation_2;
+import com.example.rxjavadeno.util.DataCache;
 
 import java.util.concurrent.TimeUnit;
 
@@ -18,10 +22,12 @@ import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.ObservableSource;
 import io.reactivex.Observer;
+import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
+import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
@@ -34,6 +40,7 @@ public class RxjavaDemoActivity extends AppCompatActivity implements View.OnClic
     private int i = 0;
 
     private Button but_1 , but_2 , but_3;
+    private TextView tv_1;
 
     // 定义Observable接口类型的网络请求对象
     private Observable<Translation> observable1;
@@ -41,13 +48,61 @@ public class RxjavaDemoActivity extends AppCompatActivity implements View.OnClic
 
     private Observable<Integer> observable;
 
+    private Disposable mDisposable;
+
+    private DataCache dataCache;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rxjava);
-        initView();
+
+        initView(this);
         monitorInitView();
-        updateUi();
+//        updateUi();
+//        stopUpdating();
+
+
+    }
+
+    private void stopUpdating() {
+        observable.create(new ObservableOnSubscribe<Object>() {
+            @Override
+            public void subscribe(ObservableEmitter<Object> e) throws Exception {
+                e.onNext(12);
+                e.onNext(13);
+                e.onNext(14);
+            }
+        }).observeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<Object>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                        Log.d("TAG","onSubscribe");
+                        mDisposable = d;
+                    }
+
+                    @Override
+                    public void onNext(Object value) {
+                        Log.d(TAG, "onNext: " + value);
+                        i++;
+                        if (i == 2) {
+                            Log.d(TAG, "dispose");
+                            mDisposable.dispose();
+                            Log.d(TAG, "isDisposed : " + mDisposable.isDisposed());
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.d(TAG, "onError");
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        Log.d(TAG, "onComplete");
+                    }
+                });
     }
 
     private void updateUi() {
@@ -87,10 +142,12 @@ public class RxjavaDemoActivity extends AppCompatActivity implements View.OnClic
                 .subscribe(consumer);
     }
 
-    private void initView() {
+    private void initView(Context context) {
         but_1 = findViewById(R.id.but_1);
         but_2 = findViewById(R.id.but_2);
         but_3 = findViewById(R.id.but_3);
+        tv_1 = findViewById(R.id.tv_1);
+        tv_1.setText(BaseActivity.getSharedPreference(context,"ljj","").toString().trim());
     }
 
     private void monitorInitView() {

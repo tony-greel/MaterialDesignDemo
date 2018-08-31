@@ -12,7 +12,7 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class RetrofitProvider {
+public class NetworkRequest {
 
     public static Retrofit create(){
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
